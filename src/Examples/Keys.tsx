@@ -15,19 +15,43 @@ const List = ({ n }: { n: number }) => {
 
 const Keys = () => {
   const [list, setList] = useState([1, 2, 3]);
+  const [listTwo, setListTwo] = useState([1, 2, 3]);
 
   return (
     <div>
       <button
         onClick={() => {
-          setList((prev) => [prev[prev.length - 1] + 1, ...prev]);
+          setList((prev) => {
+            const max = Math.max(...prev);
+            return [max + 1, ...prev];
+          });
         }}
       >
-        add
+        add first
       </button>
+      <br />
+      <button
+        onClick={() => {
+          setListTwo((prev) => {
+            const max = Math.max(...prev);
+            return [max + 1, ...prev];
+          });
+        }}
+      >
+        add second
+      </button>
+      <hr />
+      <h1>Without keys</h1>
       <ul>
         {list.map((n) => {
           return <List n={n} />;
+        })}
+      </ul>
+      <hr />
+      <h1>Using keys</h1>
+      <ul>
+        {listTwo.map((n) => {
+          return <List n={n} key={n} />;
         })}
       </ul>
     </div>
